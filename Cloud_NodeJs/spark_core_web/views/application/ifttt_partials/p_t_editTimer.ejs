@@ -1,0 +1,81 @@
+<input name="triggerType" hidden value="DateTimer">
+
+<div class="container-fluid">
+
+    <div class="panel">
+
+        <h4>时间选择:</h4>
+
+        <div class="panel-body">
+            <div class="input-append date form_datetime" id="dateTimer" >
+                <input id="inputDateTimer" size="20" type="text" value="" readonly>
+                <span  class="add-on"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+        </div>
+    </div>
+
+</div> <!--End of container-->
+
+<!--script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/icheck.js"></script>
+<script type="text/javascript" src="/js/application.js"></script-->
+<script type="text/javascript">
+
+    var timerTrigger = {'type': "dateTimer",'event':{ 'time': ""}};
+    recipeInfoByEdit.triggerEvent = timerTrigger;  //bind local var to global var recipeInfoByEdit, which is use to keep config
+    var action = recipeInfoByEdit.action;
+
+    function updateDatetimeInParam( data ){
+
+        timerTrigger.event.time = data;
+    }
+
+    function extractConfFromCurWindow(){
+
+        timerTrigger.event.time = now() + " 08:30";
+    }
+
+    function extractConfFromGlobalParam(){
+
+        timerTrigger.event.time = recipeInfoByLoad.triggerEvent.event.time;
+    }
+
+    function initParam( action){
+
+        if(action === "create"){
+            extractConfFromCurWindow();
+        } else { //update
+            extractConfFromGlobalParam();
+        }
+    }
+
+    function initWindowInShow(){
+
+        $('#inputDateTimer').val( timerTrigger.event.time );
+    }
+
+    $(document).ready(function() {
+        //Initiate plugin
+        $('#dateTimer').datetimepicker({
+            format: "yyyy-mm-dd hh:ii",
+            autoclose: true,
+            todayBtn: true,
+            startDate: now(),
+            minuteStep: 1, //30 min
+            pickerPosition: "bottom-left"
+        });
+
+        initParam(action); //called only once
+
+        initWindowInShow();
+
+        $('#dateTimer').datetimepicker().on("changeDate",function( ev ){
+
+            updateDatetimeInParam( $('#inputDateTimer').val() );
+        });
+
+    });
+
+</script>
+
+

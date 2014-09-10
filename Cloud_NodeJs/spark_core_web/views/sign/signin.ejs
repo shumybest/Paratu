@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <form role="signin" method="post">
+                <h2>登录</h2>
+                <%- message%>
+                <hr class="colorgraph">
+                <div class="form-group">
+                    <input class="form-control input-lg" id="username" name="username" type="text" placeholder="用户名 或 邮箱"/>
+                </div>
+                <div class="form-group">
+                    <input class="form-control input-lg" id="password" name="password" type="password" placeholder="密码"/>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div class="form-group" data-toggle="buttons-checkbox">
+                            <span class="button-checkbox">
+                            	<input id="rememberme" name="rememberme" type="checkbox" />
+                               	<button id="rememberbutton" type="button" class="btn btn-block btn-lg" data-color="info" onclick="javascript:
+                               		if(!$('#rememberme').attr('checked')){
+                               			$('#rememberme').attr('checked','true');
+                               			$('#rememberbutton').attr('class','btn btn-primary btn-block btn-lg');
+                               		}else{
+
+                               			$('#rememberme').removeAttr('checked');
+                               			$('#rememberbutton').attr('class','btn btn-block btn-lg');
+                              		};">在这台电脑上记住我
+                              	</button>     
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <input class="btn btn-primary btn-block btn-lg" type="submit" value="登录"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                <div class="col-xs-10 col-sm-10 col-md-10">
+                    没有帐号？
+                    <a href="/reg">注册</a>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2">
+                    <a href="/forgetPass">忘记密码</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

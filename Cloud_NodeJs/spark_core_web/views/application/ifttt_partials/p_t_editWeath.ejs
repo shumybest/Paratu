@@ -1,0 +1,79 @@
+
+<div class="container-fluid">
+    <div>
+        <h3>选择所在城市天气：</h3>
+        <select name="P1" id="P1" style="width: 200px; height: 30px"></select>
+        <select name="C1" id="C1" style="width: 200px; height: 30px"></select>
+    </div>
+<br><br>
+    <div>
+        <h3>选择天气状况：</h3>
+        <select name="weatherStatus" id="weatherStatus" style="width: 200px; height: 30px">
+            <option value="多云" selected>多云</option>
+            <option value="雨天">雨天</option>
+            <option value="下雪">下雪</option>
+            <option value="霾">霾</option>
+        </select>
+    </div>
+<br><br>
+</div>
+
+<script type="text/javascript" src="/js/pcasunzip.js"></script>
+<script type="text/javascript">
+
+    var timerTrigger = {'type': "weather",'event':{ 'weather': "", 'location':""}};
+    recipeInfoByEdit.triggerEvent = timerTrigger;  //bind local var to global var recipeInfoByEdit, which is use to keep config
+    var action = recipeInfoByEdit.action;
+
+
+
+    function extractConfFromCurWindow(){
+        timerTrigger.event.weather = "Rainy"; //$('#weatherStatus option:selected').val();
+        timerTrigger.event.location = "上海市" + "-" + "闸北区";//$('#P1 option:selected').val() + "-" + $('#C1 option:selected').val();
+    }
+
+    function extractConfFromGlobalParam(){
+        timerTrigger.event.weather = recipeInfoByLoad.triggerEvent.event.weather;
+        timerTrigger.event.location = recipeInfoByLoad.triggerEvent.event.location;
+    }
+
+    function initParam( action){
+        if(action === "create"){
+            extractConfFromCurWindow();
+        } else { //update
+            extractConfFromGlobalParam();
+        }
+    }
+
+
+    function initWindowInShow(){
+        var locArray = (timerTrigger.event.location).split('-');
+        $('#weatherStatus').val(timerTrigger.event.weather);
+        PCAS("P1", "C1", "上海市", "闸北区");
+    }
+
+    $(document).ready(function() {
+        //initialize plugin
+        new PCAS("P1", "C1");
+
+        initParam(action); //called only once
+
+        initWindowInShow();
+
+        $('#P1').change( function() {
+            timerTrigger.event.location = (timerTrigger.event.location).replace(/\S*-/, $(this).val() + '-');
+        });
+
+        $('#C1').change( function() {
+            timerTrigger.event.location = (timerTrigger.event.location).replace(/-\S*/, '-' + $(this).val());
+        });
+
+        $('#weatherStatus').change( function() {
+            timerTrigger.event.weather = $(this).val();
+        });
+
+    });
+
+</script>
+
+

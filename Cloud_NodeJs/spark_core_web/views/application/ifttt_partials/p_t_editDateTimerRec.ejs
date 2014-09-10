@@ -1,0 +1,159 @@
+<input name="recipeRecurrence" hidden value="recipeRecurrence">
+
+<div class="container-fluid">
+
+    <ul class="unstyled">
+        <li>
+            <input tabindex="8" type="radio" id="DT_OnlyOnce" name="DT_selectPeriod" value="OnlyOnce" checked>
+            <label for="DT_OnlyOnce">单次执行</label>
+
+            <div class="panel-body" id="DT_divOnlyOnce" hidden>
+                <div class="input-append date form_datetime" id="DT_dateTimePicker" >
+                    <input id="DT_inputDateTime" size="20" type="text" value="" readonly>
+                    <span  class="add-on"><i class="glyphicon glyphicon-calendar"></i></span>
+                </div>
+            </div>
+
+        </li>
+        <br>
+        <li>
+            <input tabindex="8" type="radio" id="DT_MultiTimes" name="DT_selectPeriod" value="MultiTimes">
+            <label for="DT_Recurrence">多次循环</label>
+
+            <div class="panel-body"  id="DT_divMultiTimes" hidden>
+                <form role="form" class="form-inline" >
+                    <div class="form-group">
+                        <input id="DT_cronPlugin" class="form-control" />
+                    </div>
+                </form>
+            </div>
+        </li>
+    </ul>
+
+</div> <!--End of container-->
+
+<!--script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/icheck.js"></script>
+<script type="text/javascript" src="/js/application.js"></script-->
+<script type="text/javascript">
+
+    var recipeRec = {rec: "", disRec:""};
+    recipeInfoByEdit.recipeRec = recipeRec;
+    var action = recipeInfoByEdit.action;
+
+    function isMultiTimesRecipe( cfg ){
+        if (cfg.indexOf('*') > -1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function extractTimeFromDatetimeStr( str) {
+        var timeStr = str.split('-');
+        var timeJson = {hour: "", min: ""};
+        timeJson.min = timeStr.pop();
+        timeJson.hour = timeStr.pop();
+        return timeJson;
+    }
+
+    function updateRecurrenceInParam( dataStr ){ //{hour, min, recurrence}
+        recipeRec.rec = dataStr;
+        recipeRec.disRec = dataStr;
+    }
+
+    function extractRecFromGlobalParam(){
+        recipeRec.rec = recipeInfoByLoad.recipeRec.rec;
+        recipeRec.disRec = recipeInfoByLoad.recipeRec.disRec;
+    }
+
+    function extractRecFromCurWindow() {
+        recipeRec.rec = now();
+        recipeRec.disRec = now();
+    }
+
+    function initParam( action){
+        if(action === "create"){
+            extractRecFromCurWindow();
+        } else { //update
+            extractRecFromGlobalParam();
+        }
+    }
+
+    function divVisibleToggle( recurrence ){
+        switch( recurrence ){
+            case "OnlyOnce"  :
+                $('#DT_divMultiTimes').hide();
+                break;
+            case "MultiTimes":
+                $('#DT_divMultiTimes').show();
+                break;
+            default:
+                break;
+        }
+    }
+    function initWindowInShow(){
+
+        var recurrence;
+        if ( isMultiTimesRecipe( recipeRec.rec )) {
+            var options = {disTime: "", configTime: ""};
+            options.disTime = recipeRec.disRec;
+            options.cfgTime = recipeRec.rec;
+            $('#DT_cronPlugin').cronGen(options);
+            recurrence = "MultiTimes";
+        } else {
+            $('#DT_inputDateTime').val(recipeRec.rec);
+            recurrence = "OnlyOnce";
+        }
+        //update recurrence radio box
+        $("#DT_"+ recurrence).iCheck('check');
+
+        divVisibleToggle( recurrence );
+    }
+
+    $(document).ready(function() {
+
+        //Initiate plugin
+        $('#DT_dateTimePicker').datetimepicker({
+            format: "yyyy-mm-dd",
+            autoclose: true,
+            todayBtn: true,
+            startDate: now(),
+            pickerPosition: "bottom-left",
+            minView: 2
+        });
+
+        $("#DT_cronPlugin").cronGen();
+
+        $("input[name=DT_selectPeriod]").iCheck({
+            checkboxClass: 'icheckbox_minimal-blue',
+            radioClass: 'iradio_minimal-blue',
+            increaseArea: '20%'
+        });
+        //end of Initiate plugin
+
+        initParam(action); //called only once
+
+        initWindowInShow();
+
+        $('#DT_dateTimePicker').datetimepicker().on("changeDate",function(){
+            updateRecurrenceInParam($( '#DT_inputDateTime').val() );
+        });
+
+        $('#DT_cronPlugin').change( function(){
+            //alert($('#cronPlugin').cronGen('disValue'));
+            //alert($('#cronPlugin').cronGen('cfgvalue'));
+            alert("I am changed");
+            updateRecurrenceInParam($(this).val());
+
+        });
+
+        $('input[name=DT_selectPeriod]').on('ifClicked', function(event){
+
+            divVisibleToggle($(this).val());
+        });
+    });
+
+</script>
+
+

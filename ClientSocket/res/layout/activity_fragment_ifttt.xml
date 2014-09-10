@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background" >
+
+        <TableLayout
+            android:id="@+id/ifttt_table"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="1">
+        </TableLayout>
+        
+        <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:padding="16dp"
+                android:gravity="bottom|center_horizontal">
+                <Button
+                    android:id="@+id/ifttt_new_button"
+                	style="@style/paratuButton"
+                	android:layout_alignParentLeft="true"
+                	android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:text="@string/ifttt_new"
+                    android:background="@drawable/button"/>
+       </RelativeLayout>
+</FrameLayout>

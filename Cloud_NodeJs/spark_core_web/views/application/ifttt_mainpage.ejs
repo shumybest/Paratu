@@ -1,0 +1,116 @@
+<input id="countOfRecipe" value="<%- (recipeInfo.length)%>" hidden>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="container container-md-height">
+                        <div class="row row-md-height">
+                            <div class="col-md-8  col-md-height">
+                                <h1>您已订制 <strong><%- (recipeInfo.length) %></strong> 项IFTTT服务</h1>
+                            </div>
+                            <div class="col-md-3  col-md-height">
+                                <button type="button" class="btn btn-info  btn-lg btn-block" id="btn_createNewRecipe"
+                                        onclick="location.href = 'addRecipe'">添加新订制
+                                </button>
+                            </div>
+                            <div class="col-md-1 col-md-height"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <%
+                        for (var i = 0; i < (recipeInfo.length); i++ ) {
+                    %>
+                    <!--div id=<%- "divOfRecipe" + i%>></div-->
+                    <%- partial("application/ifttt_partials/p_disRecipeInMainPage", {recipeInfo: recipeInfo[i]})%>
+                    <%
+                        }
+                    %>
+                </div>
+            </div>
+
+            <div class="panel panel-default" hidden>
+                <div class="panel-heading">用户已订制服务</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <table class="table table-hover">
+                                <%- recipeList %>
+                            </table>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-info  btn-lg btn-block" id="btn_createNewRecipe"
+                                    onclick="location.href = 'addRecipe'">添加新订制
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--
+            <div class="panel panel-default">
+                <div class="panel-heading">用户已激活的设备</div>
+                <div class="panel-body">
+                    <div class="row-fluid">
+                        <div class="col-md-8">
+                            <img src="/images/ifttt/email.png" alt="" class="img-circle">
+                            <img src="/images/ifttt/lighter.png" alt="" class="img-circle">
+                            <img src="/images/ifttt/Timer.png" alt="" class="img-circle">
+
+
+                            <img src="" alt="" class="img-circle">
+                        </div>
+                        <div class="col-md-4">
+                            <h4>推荐设备列表</h4>
+                            <img src="/images/ifttt/airCondition.png" alt="" class="img-circle">
+                            <img src="/images/ifttt/weather.png" alt="" class="img-circle">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">可订制服务推荐</div>
+                <div class="panel-body">
+                    <h4>推荐服务列表</h4>
+                    <%- partial('application/ifttt_partials/p_picOneRecipe') %>
+                </div>
+            </div>
+
+            -->
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        window.onload = function() {
+            /*for(var i=0; i< $("#countOfRecipe").val(); i++) {
+             $("#divOfRecipe" + i).load("/dashboard/loadOneRecipe", {indexOfDiv: i});
+             }
+            */
+        }
+        $('#btn_createNewRecipe').click(function(){
+        });
+
+        $('tr').mouseover( function(){
+            $(this).addClass('success');
+        });
+
+        $('tr').mouseleave( function(){
+            $(this).removeClass("success");
+        });
+
+        $('tr').click( function() {
+            var index = $(this).attr('id');
+            window.location.href = "/dashboard/editRecipe?index="+index;
+        });
+
+    });
+
+</script>

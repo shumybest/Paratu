@@ -1,0 +1,5 @@
+2014/2/26 pdli:
+- Refer to:  http://blog.fens.me/nodejs-express3/
+- Add css formats in public/*
+- Change the extensive from ejs to html, which will be easy to edit the webpage.
+- Add web page and route for login and register.

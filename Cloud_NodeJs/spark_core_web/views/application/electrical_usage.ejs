@@ -1,0 +1,66 @@
+<div class="container-fluid"><div class="row"><div class="col-md-10 col-md-offset-1"><div class="container-fluid">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <!-- multi Select -->
+                <div class="row">
+                    <div class="col-md-3 col-lg-3">
+                        <select class="multiselect" multiple="multiple" id="deviceSelect" name="deviceSelect">
+                            <%- devicelist%>
+                        </select>
+                    </div>
+                    <!-- DateTime Calender -->
+                    <div class="col-md-2 col-md-offset-5">
+                        <div class="input-append date form_datetime" id="startElecTime">
+                            <input id="startdateInput" size="12" type="text" value="" readonly>
+                            <span  class="add-on"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-2 ">
+                        <div class="input-append date form_datetime" id="endElecTime">
+                            <input id="enddateInput" size="12" type="text" value="" readonly>
+                            <span class="add-on"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <!--draw Elec -->
+
+                <div id='showElecAccumulate' style="width:97%"></div>
+                <hr class="line">
+                <div id='showElecCollection' style="width:97%"></div>
+
+            </div>
+        </div>
+
+        <!--Distribut Chart for each customer-->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <!-- DateTime Calender -->
+                <div class="row">
+                    <div class="col-md-2 col-md-offset-8">
+                        <div class="input-append date form_datetime " id="startElecTime_">
+                            <input size="12" type="text" value="" readonly>
+                            <span class="add-on"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="input-append date form_datetime" id="endElecTime_">
+                            <input size="12" type="text" value="" readonly>
+                            <span class="add-on"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <!--draw Elec-->
+                <div id='showCustomerColumn' style="width:97%"></div>
+            </div>
+        </div>
+</div></div></div></div>
+
+<!-- javascript代码  -->
+<script src="/js/controlDrawElecChart.js"></script>
+<script src="/js/drawElec.js"></script>
+<script src="/js/electrical_usage.js"></script>
+

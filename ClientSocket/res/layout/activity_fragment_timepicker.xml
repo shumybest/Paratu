@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/WizardPageContainer">
+
+    <TextView style="@style/WizardPageTitle" />
+    
+    <FrameLayout
+        android:id="@+id/time_display_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+        <include
+            layout="@layout/radial_time_header_label"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/header_height"
+            android:layout_gravity="center" />
+    </FrameLayout>
+	<com.doomonafireball.betterpickers.radialtimepicker.RadialPickerLayout
+	    android:id="@+id/time_picker"
+	    android:layout_height="@dimen/picker_dimen"
+	    android:layout_width="wrap_content"
+	    android:layout_gravity="center"
+	    android:focusable="true"
+	    android:focusableInTouchMode="true" />
+	    
+</LinearLayout>

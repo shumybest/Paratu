@@ -1,0 +1,215 @@
+<%
+    if(user == undefined) {
+%>
+<input id="userName" value="forTestBugExisted" hidden>
+<% } else {
+%>
+<input id="userName" value=<%- user.name%> hidden>
+<%
+}
+%>
+
+<div class="l2header">
+    <div class="container">
+        <h1>订制新服务：</h1>
+    </div>
+</div>
+
+<div class="container-fluid"><div class="row"><div class="col-md-10 col-md-offset-1">
+
+    <div class="panel panel-primary" id="div_selectTrigger" style="height: 400px" >
+        <div class="panel-heading">
+            <span>选择触发设备Trigger：</span>
+        </div>
+        <div class="panel-body">
+            <select name="recipeTrigger" id="selectForTriggerEvent" style="width: 200px; height: 30px" >
+                <option value=""></option>
+                <%- triggerlist %>
+            </select>
+        </div>
+    </div>
+
+    <div class="panel panel-success" hidden id="div_editTrigger">
+        <div class="panel-body">
+            <div class="btn-group dropup backButton" style="float:right;">
+                <button type="button" class="btn btn-default">BACK</button>
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+            </div>
+            <div id="triggerFrame"></div>
+            <!--%- partial("application/ifttt_partials/p_t_editTimer")%-->
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <button type="button" class="btn btn-primary btn-lg btn-block" id="nextStep">下一步</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-primary" id="div_selectAction" hidden>
+        <div class="panel-heading"  >
+            <span>选择响应源Action：</span>
+        </div>
+        <div class="panel-body" style="height: 400px">
+            <!-- Back Button -->
+            <div class="btn-group dropup backButton" style="float:right;">
+                <button type="button" class="btn btn-default">BACK</button>
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+            </div>
+
+            <select name="recipeAction" id="selectForRspEvent" style="width: 100px; height: 30px">
+                <option value=""></option>
+                <%- actionlist %>
+            </select>
+        </div>
+    </div>
+
+
+     <div class="panel panel-info" hidden id="div_editAction">
+         <div class="panel-body" style="height: 400px" >
+             <!-- Back Button -->
+             <div class="btn-group dropup backButton" style="float:right;">
+                 <button type="button" class="btn btn-default">BACK</button>
+                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                     <span class="caret"></span>
+                     <span class="sr-only">Toggle Dropdown</span>
+                 </button>
+             </div>
+             <div id="actionHtml"></div>
+             <!--%- partial('application/ifttt_partials/p_a_editlighter')%-->
+             <div class="row" style="position: relative; bottom: -258px">
+                 <div class="col-md-3">
+                     <button type="button" class="btn btn-primary btn-lg btn-block" id="loadRecBtn">下一步</button>
+                 </div>
+             </div>
+         </div>
+     </div>
+
+    <div class="panel panel-primary" hidden id="div_selectRecurrence" style="height: 400px">
+        <div class="panel-heading">
+            <span>选择事件执行周期: </span>
+        </div>
+        <div class="panel-body">
+            <div class="btn-group dropup backButton" style="float:right;">
+                <button type="button" class="btn btn-default">BACK</button>
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+            </div>
+            <div id="recipeRecFrame"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <button type="button" id="submitBtn" class="btn btn-primary btn-lg btn-block" hidden>提交</button>
+        </div>
+    </div>
+
+     <!-- Blank should be kept, it is a trick-->
+     <div style="height: 1200px" id=""/>
+
+</div></div></div>
+
+<script src="/js/recipeManage.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+    var controlledDivList = ["div_selectTrigger", "div_editTrigger", "div_selectAction", "div_editAction", "div_selectRecurrence"]; //5 models/steps for add recipe
+    var currentDivItem = 0;
+
+    function updateDivInShow(){
+        var bodyTop = 190;
+        controlledDivList.forEach(function(value, index){
+            if(index < currentDivItem){
+                $('#' +value).css("background-color", "#EAEAEA");
+                bodyTop = bodyTop + $("#"+ value).height() + 20;
+            } else if (index >currentDivItem){
+                $('#' +value).hide();
+            } else { //====
+                $('#' +value).css("background-color", "#FFFFFF");
+                $('#' +value).show();
+            }
+        });
+        $("html, body").animate({ scrollTop: bodyTop });
+    }
+
+    function updateSubmitBtnVisible() {
+        if (currentDivItem >= controlledDivList.length - 1) {
+            $('#submitBtn').show();
+        } else {
+            $('#submitBtn').hide();
+        }
+    }
+
+    function onNextStep() {
+        currentDivItem++;
+        updateDivInShow();
+        updateSubmitBtnVisible();
+    }
+
+    function onBackStep() {
+        currentDivItem --;
+        updateDivInShow();
+        updateSubmitBtnVisible();
+    }
+
+    function initGlobalParam() {
+        //alert("user.name is" + $('#userName').val());
+        recipeInfoByEdit.owner = $('#userName').val();
+        recipeInfoByEdit.action = "create";
+    }
+
+    function initWindow () {
+        $("html, body").animate({ scrollTop: 100 });
+        $("#submitBtn").hide();
+    }
+
+    $(document).ready(function () {
+
+        window.onload = function(){
+            initGlobalParam();
+            initWindow();
+        }
+
+        $('.backButton').click(function(){
+            onBackStep();
+        });
+
+        $('#loadRecBtn').click(function(){
+            loadRecipeRecFrame("recipeRecFrame", $('#selectForTriggerEvent').val());
+            onNextStep();
+        });
+
+        $("#nextStep").click(function(){
+            onNextStep();
+        });
+
+        $("#selectForTriggerEvent").change( function(){
+            loadTriggerEventFrame("triggerFrame", $('#selectForTriggerEvent').val());
+            onNextStep();
+        });
+
+        $('#selectForRspEvent').change( function(){
+            var optionCfg = {id: $('#selectForRspEvent option:checked').attr('id'), name: $('#selectForRspEvent option:checked').attr('label')};
+            loadResponseEventFrame("actionHtml", $(this).val(), optionCfg);
+            onNextStep();
+        });
+
+        $('#submitBtn').click( function() {
+
+            //encodeDataForRecipeInfo();
+            $.post("/dashboard/addRecipe", recipeInfoByEdit, function(){});
+            window.location.href = "ifttt";
+        });
+
+    });
+
+
+
+</script>

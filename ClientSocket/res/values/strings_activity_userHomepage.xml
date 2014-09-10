@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="title_monitored_device_list">设备管理</string>
+    <string name="wifiSSId">本地的WIFI名称</string>
+    <string name="WifiPassword">本地的WIFI密码</string>
+    <string name="action_smartConfig">连接</string>
+    <string name="add_device_button">增加设备</string>
+    <string name="devicesList_progress">获取设备列表</string>
+    <string name="devicesList_fail">获取设备列表失败</string>
+    <string name="retrieved_Devices">获取设备列表成功</string>
+    <string name="no_Device">未发现设备，请通过添加设备添加</string>
+    <string name="New_Device_success">添加设备成功</string>
+    <string name="newDevice_found_title">查找到新设备</string>
+    <string name="newDevice_nameit">查找到新设备，请命名</string>
+    <string name="New_Device_fail">添加设备失败</string>
+    <string name="newDevice_progress">正在查找新设备</string>
+    <string name="action_add_device_short">添加</string>
+    <string name="drawer_open">List Devices</string>
+    <string name="drawer_close">Hide</string>
+    <string name="update_device_progress">更新设备</string>
+    <string name="update_device_fail">更新设备失败</string>
+    <string name="update_device_cloud">正在添加设备</string>
+    <string name="device_name">设备名</string>
+    <string name="coreid">设备标识</string>
+    <string name="submit">提交</string>
+    <string name="title_IFTTT">IFTTT</string>
+    <string name="ifttt_new">创建IFTTT</string>
+    <string name="title_usage">用电量</string>
+    <string name="title_showelec">分时用电量</string>
+    <string name="title_showelectotal">总计用电量</string>
+    <string name="usage_showhints">更多信息请登录www.Paratu.com查询</string>
+ 
+</resources>

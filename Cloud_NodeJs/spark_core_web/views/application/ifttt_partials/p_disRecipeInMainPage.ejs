@@ -1,0 +1,75 @@
+<!--input id=<%- "recipe_" + recipeInfo.indexInSession%> value="<%- recipeInfo.indexInSession%>" hidden-->
+
+<div class="panel">
+    <br>
+
+    <div class="container">
+        <dl class='dl-horizontal'>
+            <dt>服务描述：</dt>
+            <dd><%- recipeInfo.des%></dd>
+        </dl>
+    </div>
+
+    <div class="container container-md-height">
+        <div class="row row-md-height">
+            <div class="col-md-1 col-md-height" align="right">
+                <span style="font-size:80px; vertical-align: middle; ">if</span>
+            </div>
+            <div class="col-md-2 col-md-height" style=" width:12%">
+                <img id=<%- "trigImg_" + recipeInfo.indexInSession %> src="<%- recipeInfo.triggerImg%>" alt="" class="img-rounded">
+            </div>
+            <div class="col-md-3 col-md-height" style=" width:18%">
+                <span style="font-size:80px; vertical-align: middle; ">then</span>
+            </div>
+            <div class="col-md-2 col-md-height ">
+                <img id=<%- "rspImg_" + recipeInfo.indexInSession %> src="<%- recipeInfo.responseImg%>" alt="" class="img-rounded">
+            </div>
+            <div class="col-md-4 col-md-height col-bottom">
+                <button id=<%- "Btn_act_" + recipeInfo.indexInSession %> type="button" class="btn btn-primary">开关服务</button>
+                <button id=<%- "Btn_edit_" + recipeInfo.indexInSession %> type="button" class="btn btn-success">更新服务</button>
+                <button id=<%- "Btn_del_" + recipeInfo.indexInSession %> type="button" class="btn btn-danger">删除服务</button>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
+
+<script type="text/javascript">
+
+    function getIndexFromGlobalParam ( )
+    {
+        var index =  countOfRecipeInfo;
+        countOfRecipeInfo ++;
+        return index;
+    }
+
+    function initWindow(data, index) {
+        $('dd').eq(index).text(data.des);
+        $('#desOfRecipe_' + index).val( data.des);
+        $('#trigImg_' + index).attr('src', data.triggerImg);
+        $('#rspImg_' + index).attr('src', data.responseImg);
+    }
+
+    $(document).ready(function(){
+
+        var indexOfRecipe = getIndexFromGlobalParam();
+
+        /*$.post("/dashboard/extractRecipeInfoFromServer",{indexOfDiv: indexOfRecipe}, function (data, textStatus){
+            initWindow(data, indexOfRecipe);
+        });*/
+
+
+        $('#Btn_act_'+ indexOfRecipe).click(function() {
+            alert("Btn_act_" + indexOfRecipe + "clicked");
+        });
+
+        $('#Btn_del_' + indexOfRecipe).click(function() {
+            alert("Btn_del_" + indexOfRecipe + " is clicked");
+        });
+
+        $('#Btn_edit_' + indexOfRecipe).click(function() {
+            window.location.href = "/dashboard/editRecipe?index=" + indexOfRecipe;
+        });
+
+    });
+</script>

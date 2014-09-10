@@ -1,0 +1,67 @@
+<input id="rspEventType" value="device" hidden>
+<input id="deviceName" value="<%-deviceName%>" hidden>
+<input id="coreId" value="<%-coreId%>" hidden>
+
+<h4>Description of device/service:  </h4>
+<div>
+    <span>Turn On or Off <%- deviceName%> ?</span>
+    <input class="switch" type="checkbox" name="lighter_checkbox" id="lighter_checkbox" checked>
+</div>
+
+
+<script type="text/javascript">
+
+    var re_SwitchDevice = {type: "device", event: {coreid: "", deviceName:"", operation: "turnOnOff", value: 1}};
+    recipeInfoByEdit.responseEvent = re_SwitchDevice; //bind local var to global var recipeInfoByEdit
+    var action = recipeInfoByEdit.action;
+
+    function updateSwitchInParam( stats ) {
+        if(stats == true) {
+            re_SwitchDevice.event.value = 1;
+        } else {
+            re_SwitchDevice.event.value = 0;
+        }
+    }
+
+    function extractConfFromCurWindow (){
+        re_SwitchDevice.event.coreid = $('#coreId').val();
+        re_SwitchDevice.event.deviceName = $('#deviceName').val();
+        updateSwitchInParam( $('#lighter_checkbox').bootstrapSwitch('state') );
+    }
+
+    function extractConfFromGlobalParam() {
+        re_SwitchDevice.event.coreid = recipeInfoByLoad.responseEvent.event.coreid;
+        re_SwitchDevice.event.deviceName = recipeInfoByLoad.responseEvent.event.deviceName;
+        updateSwitchInParam(recipeInfoByLoad.responseEvent.event.value);
+    }
+    function initParam(){
+        if(action === "create") {
+            extractConfFromCurWindow();
+        } else { //update
+            extractConfFromGlobalParam();
+        }
+    }
+
+    function initWindowInShow(){
+        $('#lighter_checkbox').bootstrapSwitch('state',  re_SwitchDevice.event.value);
+    }
+
+    $(document).ready(function () {
+
+        $("input.switch").bootstrapSwitch({
+            'onColor': "info",
+            'size': "large",
+            'state': false,
+            'offColor': "default"
+        });
+
+        initParam();
+
+        initWindowInShow();
+
+        $("#lighter_checkbox").on('switchChange.bootstrapSwitch', function (event, state) {
+
+            updateSwitchInParam(state);
+        });
+    });
+</script>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %> - Paratu</title>
+    <link rel='stylesheet' href='/css/bootstrap.css' />
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel='stylesheet' href='/css/bootstrap.css' />
+    <link rel='stylesheet' href='/css/bootstrap-responsive.css' />
+    <link rel='stylesheet' href='/css/Fleetio.css' />
+    <link rel='stylesheet' href='/css/all.css' />
+</head>
+
+<body>
+<div class='navbar navbar-static-top' id='main-nav'>
+    <div class='navbar-inner'>
+        <div class='container'>
+            <a class='logo' href='/' title='Fleetio homepage'>
+                <img alt="Fleetio logo" class="hidden-phone" width="30" height="28" src="/images/Logo.png" />
+                <img alt="Fleetio logo" class="visible-phone" width="81" height="21" src="http://www.fleetio.com/assets/images/fleetio-logo-small.png" />
+            </a>
+
+            <div class='nav-collapse collapse'>
+                <ul class='nav'>
+                    <li class=''><a href='/'>主页</a></li>
+                    <li class=''><a href='/pricing/'>产品介绍</a></li>
+                    <li class=''><a href='/why/'>联系我们</a></li>
+                    <li class=''><a href='/success-stories/'>论坛</a></li>
+                    <li class=''><a href='/faq/'>咨询</a></li>
+                </ul>
+             </div>
+
+            <div class='pull-right'>
+                <a class='btn btn-success' href='/reg' title='Create a new Paratu account'>
+                    注册
+                </a>
+                <a class='btn btn-inverse' href='/signin' title='Log in to Paratu'>
+                    登录
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<%- body %>
+
+<footer>
+        <p><a href="https://www.byvoid.com/project/node/" target="_blank">Paratu Tech Co, Ltd</a> 2014</p>
+</footer>
+
+</body>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+</html>

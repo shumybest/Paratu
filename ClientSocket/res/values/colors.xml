@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="red">#FF3300</color>
+    <color name="blue">#33CCFF</color>
+    <color name="transparent_blue">#66CCFF</color>
+    <color name="green">#99FF99</color>
+    <color name="green_light">#CCFFCC</color>
+    <color name="orange">#FF9933</color>
+    <color name="transparent_orange">#FFCC99</color>
+    <color name="purple">#FFAA66CC</color>
+    <color name="gray">#AAAAAA</color>
+    <color name="step_pager_previous_tab_color">#4433b5e5</color>
+    <color name="step_pager_selected_tab_color">#ff0099cc</color>
+    <color name="step_pager_selected_last_tab_color">#ff669900</color>
+    <color name="step_pager_next_tab_color">#10000000</color>
+
+    <color name="review_green">#ff669900</color>
+
+    <color name="text_light">#66000000</color>
+</resources>

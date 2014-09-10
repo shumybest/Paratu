@@ -1,0 +1,41 @@
+<div class="l2header">
+    <!-- second level nav items here, need to be updated by URL -->
+    <%
+    if(user != undefined) {
+        var choosn = 0;
+        var devreg = /devices/;
+        var elecreg = /elec/;
+        var iftttreg = /ifttt/;
+    %>
+    <div class="container">
+        <%
+        if(devreg.test(url)){
+            choosn = 1;
+        %>
+        <h2>设备管理</h2>
+        <p class="text-muted">在这里，您可以管理您的设备，对设备进行删除或者更新操作。</p>
+        <%
+        } else if(elecreg.test(url)){
+            choosn = 2;
+        %>
+        <h2>能耗显示</h2>
+        <p class="text-muted">在这里，您可以查看单个设备、所有设备的能耗。</p>
+        <%
+        } else if(iftttreg.test(url)) {
+            choosn = 3;
+        %>
+        <h2>IFTTT设置</h2>
+        <p class="text-muted">在这里，您可以设置你想要的IF This Than That功能。</p>
+        <%
+        }
+        %>
+        <ul class="nav nav-tabs">
+            <li <%if(choosn == 1){%>class="active"<%}%>><a href="/dashboard/devices"><h4>设备管理</h4></a></li>
+            <li <%if(choosn == 2){%>class="active"<%}%>><a href="/dashboard/elec"><h4>用电量查询</h4></a></li>
+            <li <%if(choosn == 3){%>class="active"<%}%>><a href="/dashboard/ifttt"><h4>IFTTT</h4></a></li>
+        </ul>
+    </div>
+    <%
+    }
+    %>
+</div>
