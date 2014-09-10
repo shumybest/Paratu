@@ -9,7 +9,9 @@ Power usage collection & analyze
 IFTTT
 
 Cloud_NodeJs: Cloud
-  |_ spark_core_web: Web Front-End£¬Nodejs + bootstrap
+
+  |_ spark_core_web: Web Front-End, Nodejs + bootstrap
+  
   |_ others: Nodejs + MongoDB
   
 cloudSimulator: simulator for app development use
