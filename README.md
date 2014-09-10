@@ -9,10 +9,13 @@ These files have been made available online through a [Creative Commons Attribut
 ### Features ready:
 
 **SmartConfig on App**
+
 **Turn power on/off**
 
 ### Features under development:
+
 **Power usage collection & analyze**
+
 **IFTTT**
 
 ### Directory:
